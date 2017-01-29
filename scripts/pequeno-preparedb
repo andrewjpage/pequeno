@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+import os
+import pkg_resources
+sys.path.append('../')
+sys.path.append('./')
+from  pequeno.PrepareDb import PrepareDb
+from  pequeno.InputTypesPrepareDb import InputTypesPrepareDb
+
+version = ''
+try:
+	version = pkg_resources.get_distribution("pequeno-preparedb").version
+except pkg_resources.DistributionNotFound:
+	version = 'x.y.z'
+
+parser = argparse.ArgumentParser(
+	description = 'Download NT and build a kmer database',
+	usage = 'pequeno-preparedb [options] output_directory')
+parser.add_argument('output_directory', help='Output directory', type=InputTypesPrepareDb.is_output_directory_valid )
+parser.add_argument('--kmer',	 '-k', help='Kmer to use, must match when running pequeno [%(default)s]', type=InputTypesPrepareDb.is_kmer_valid,  default = 61)
+parser.add_argument('--min_kmers_threshold',	 '-m', help='Exclude k-mers occurring less than this [%(default)s]', type=InputTypesPrepareDb.is_min_kmers_threshold_valid,  default = 1)
+parser.add_argument('--threads',  '-t', help='Number of threads [%(default)s]', type=InputTypesPrepareDb.is_threads_valid,  default = 1)
+parser.add_argument('--url',  '-u', help='url of NT database [%(default)s]',  default = 'ftp://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/nt.gz')
+parser.add_argument('--verbose',  '-v', action='count', help='Turn on debugging [%(default)s]', default = 0)
+parser.add_argument('--version', action='version', version=str(version))
+
+options = parser.parse_args()
+
+preparedb = PrepareDb(options)
+preparedb.run()

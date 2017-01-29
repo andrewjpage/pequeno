@@ -1,0 +1,16 @@
+
+distribute nt database
+# prepare database
+mkdir 
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/db/FASTA/nt.gz
+unzip
+put current date in name
+kmc -k61 -ci1 -t8 -fm nt.fa ntdb tmp
+kmc_tools compact
+
+
+Input is NT database, fastq file
+kmc over FASTQ file
+subtract
+filter reads
+assemble
