@@ -39,7 +39,7 @@ class Pequeno:
 		kmc_subtract = KmcSubtract( kmc_sample.sample.database_name ,self.database, self.output_directory, self.threads, 'subtract_results')
 		kmc_subtract.run()
 
-		kmc_filter = KmcFilter(sample, self.output_directory, self.threads,kmc_subtract.result_database())
+		kmc_filter = KmcFilter(sample, self.output_directory, self.threads,kmc_subtract.result_database)
 		kmc_filter.filter_fastq_file_against_kmers()
 		
 		spades_assembly = SpadesAssembly( sample, self.output_directory, self.threads, self.kmer, self.spades_exec, self.min_contig_len)
