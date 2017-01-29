@@ -20,6 +20,13 @@ class InputTypesPequeno:
 				return kmer
 		raise argparse.ArgumentTypeError("Invalid Kmer value, it must be an odd integer between 21 and 127")
 		
+	def is_min_contig_len_valid(value_str):
+		if value_str.isdigit():
+			min_contig_len = int(value_str)
+			if  min_contig_len >= 0 and min_contig_len <= 1000000:
+				return min_contig_len
+		raise argparse.ArgumentTypeError("Invalid minimum contig length value, try a resonable value like 600")
+		
 	def is_min_kmers_threshold_valid(value_str):
 		if value_str.isdigit():
 			min_kmers_threshold = int(value_str)
