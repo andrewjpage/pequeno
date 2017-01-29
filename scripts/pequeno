@@ -24,6 +24,7 @@ parser.add_argument('forward_fastq', help='Forward FASTQ, can be gzipped', type=
 parser.add_argument('reverse_fastq', help='Reverse FASTQ, can be gzipped', type=InputTypesPequeno.is_database_valid )
 parser.add_argument('--kmer',	 '-k', help='Kmer to use, must match when running pequeno [%(default)s]', type=InputTypesPequeno.is_kmer_valid,  default = 61)
 parser.add_argument('--min_kmers_threshold',	 '-m', help='Exclude k-mers occurring less than this [%(default)s]', type=InputTypesPequeno.is_min_kmers_threshold_valid,  default = 1)
+parser.add_argument('--max_kmers_threshold',	 '-x', help='Exclude k-mers occurring more than this [%(default)s]', type=InputTypesPequeno.is_max_kmers_threshold_valid,  default = 255)
 parser.add_argument('--threads',  '-t', help='Number of threads [%(default)s]', type=InputTypesPequeno.is_threads_valid,  default = 1)
 parser.add_argument('--verbose',  '-v', action='count', help='Turn on debugging [%(default)s]', default = 0)
 parser.add_argument('--version', action='version', version=str(version))

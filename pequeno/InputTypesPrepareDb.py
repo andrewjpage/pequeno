@@ -29,3 +29,9 @@ class InputTypesPrepareDb:
 				return threads
 		raise argparse.ArgumentTypeError("Invalid number of threads, it must at least 1 and less than the No. of CPUs")
 		
+	def is_max_kmers_threshold_valid(value_str):
+		if value_str.isdigit():
+			max_kmers_threshold = int(value_str)
+			if  max_kmers_threshold >= 10 and max_kmers_threshold <= 255:
+				return max_kmers_threshold
+		raise argparse.ArgumentTypeError("Invalid maximum kmers threshold, it must be between 10 and 255, and greater than the minimum kmer value, but ideally greater than the coverage.")

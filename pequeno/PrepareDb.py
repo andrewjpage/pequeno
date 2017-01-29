@@ -1,7 +1,7 @@
 import sys
 import os
 import logging
-import urllib
+import urllib.request
 import tempfile
 
 from pequeno.Kmc import Kmc
@@ -23,7 +23,8 @@ class PrepareDb:
 		return os.path.join(self.output_directory,'nt.gz')
 
 	def download_file(self):
-		urllib.urlretrieve(self.url, self.downloaded_file())
+		local_filename, headers = urllib.request.urlretrieve(self.url)
+		os.rename(local_filename, self.downloaded_file())
 	
 	def nt_database(self):
 		return os.path.join(self.output_directory,'ntdb')
