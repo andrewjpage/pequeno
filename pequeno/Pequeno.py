@@ -5,7 +5,7 @@ import time
 from pequeno.SampleData import SampleData
 #from pequeno.SpreadsheetParser import SpreadsheetParser
 from pequeno.Kmc import Kmc
-#from pequeno.KmcComplex import KmcComplex
+from pequeno.KmcSubtract import KmcSubtract
 from pequeno.FastqReadNames import FastqReadNames
 from pequeno.KmcFilter import KmcFilter
 from pequeno.SpadesAssembly import SpadesAssembly
