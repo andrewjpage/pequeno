@@ -36,7 +36,7 @@ class Pequeno:
 		kmc_sample.run()
 		
 		self.logger.info("Finding novel kmers")
-		kmc_subtract = KmcSubtract( kmc_sample,self.database, self.output_directory, self.threads, 'subtract_results')
+		kmc_subtract = KmcSubtract( kmc_sample.sample.database_name ,self.database, self.output_directory, self.threads, 'subtract_results')
 		kmc_subtract.run()
 
 		kmc_filter = KmcFilter(sample, self.output_directory, self.threads,kmc_subtract.result_database())
