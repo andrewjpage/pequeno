@@ -27,6 +27,14 @@ class InputTypesPequeno:
 				return min_kmers_threshold
 		raise argparse.ArgumentTypeError("Invalid minimum kmers threshold, it must be between 0 and 255, but ideally 1.")
 		
+	def is_max_kmers_threshold_valid(value_str):
+		if value_str.isdigit():
+			max_kmers_threshold = int(value_str)
+			if  max_kmers_threshold >= 10 and max_kmers_threshold <= 255:
+				return max_kmers_threshold
+		raise argparse.ArgumentTypeError("Invalid maximum kmers threshold, it must be between 10 and 255, and greater than the minimum kmer value, but ideally greater than the coverage.")
+		
+		
 	def is_threads_valid(value_str):
 		if value_str.isdigit():
 			threads = int(value_str)

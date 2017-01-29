@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(
 	description = 'Assemble novel kmers',
 	usage = 'pequeno-preparedb [options] output_directory database forward_fastq reverse_fastq')
 parser.add_argument('output_directory', help='Output directory', type=InputTypesPequeno.is_output_directory_valid )
-parser.add_argument('database', help='Database from pequeno-preparedb', type=InputTypesPequeno.is_database_valid )
+parser.add_argument('database', help='Database from pequeno-preparedb' )
 parser.add_argument('forward_fastq', help='Forward FASTQ, can be gzipped', type=InputTypesPequeno.is_database_valid )
 parser.add_argument('reverse_fastq', help='Reverse FASTQ, can be gzipped', type=InputTypesPequeno.is_database_valid )
 parser.add_argument('--kmer',	 '-k', help='Kmer to use, must match when running pequeno [%(default)s]', type=InputTypesPequeno.is_kmer_valid,  default = 61)
