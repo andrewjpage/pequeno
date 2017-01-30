@@ -15,7 +15,9 @@ class PrepareDb:
 		self.input_file              = options.input_file
 		self.kmer                    = options.kmer
 		self.min_kmers_threshold     = options.min_kmers_threshold
-		self.temp_working_dir        = tempfile.mkdtemp(dir=os.path.abspath(options.output_directory))
+		
+		os.makedirs(self.output_directory)
+		self.temp_working_dir        = tempfile.mkdtemp(dir=os.path.abspath(self.output_directory))
 
 	def db_full(self):
 		return os.path.join(self.output_directory,'db_full')
@@ -30,7 +32,6 @@ class PrepareDb:
 		return ' '.join(['kmc_tools', 'compact', self.db_full(), self.db_compact()])
 	
 	def run(self):
-		os.makedirs(self.output_directory)
 		
 		self.logger.info("Counting kmers" )
 		subprocess.call(self.kmc_command(),shell=True)
