@@ -15,7 +15,7 @@ class PrepareDb:
 		self.input_file              = options.input_file
 		self.kmer                    = options.kmer
 		self.min_kmers_threshold     = options.min_kmers_threshold
-		self.temp_working_dir        = tempfile.mkdtemp(dir=os.path.abspath(output_directory))
+		self.temp_working_dir        = tempfile.mkdtemp(dir=os.path.abspath(options.output_directory))
 
 	def db_full(self):
 		return os.path.join(self.output_directory,'db_full')
