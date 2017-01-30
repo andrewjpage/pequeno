@@ -1,6 +1,7 @@
 import sys
 import os
 import logging
+import subprocess
 import tempfile
 
 from pequeno.Kmc import Kmc
@@ -26,7 +27,7 @@ class PrepareDb:
 		return os.path.join(self.output_directory,'db')
 
 	def kmc_command(self):
-		return ' '.join(['kmc', '-k'+self.kmer, '-ci'+self.min_kmers_threshold, '-t'+self.threads, '-fm', self.input_file, self.db_full(), self.temp_working_dir])
+		return ' '.join(['kmc', '-k'+str(self.kmer), '-ci'+str(self.min_kmers_threshold), '-t'+str(self.threads), '-fm', self.input_file, self.db_full(), self.temp_working_dir])
 	
 	def kmc_compact_command(self):
 		return ' '.join(['kmc_tools', 'compact', self.db_full(), self.db_compact()])
