@@ -1,7 +1,6 @@
 import sys
 import os
 import logging
-import urllib.request
 import tempfile
 
 from pequeno.Kmc import Kmc
@@ -12,35 +11,35 @@ class PrepareDb:
 		self.start_time = int(time.time())
 		self.logger = logging.getLogger(__name__)
 		self.output_directory        = options.output_directory 
-		self.url                     = options.url
 		self.verbose                 = options.verbose
 		self.threads                 = options.threads
+		self.input_file              = options.input_file
 		self.kmer                    = options.kmer
 		self.min_kmers_threshold     = options.min_kmers_threshold
 		self.temp_working_dir        = tempfile.mkdtemp(dir=os.path.abspath(output_directory))
 
-	def downloaded_file(self):
-		return os.path.join(self.output_directory,'nt.gz')
-
-	def download_file(self):
-		local_filename, headers = urllib.request.urlretrieve(self.url)
-		os.rename(local_filename, self.downloaded_file())
+	def db_full(self):
+		return os.path.join(self.output_directory,'db_full')
 	
-	def nt_database(self):
-		return os.path.join(self.output_directory,'ntdb')
+	def db_compact(self):
+		return os.path.join(self.output_directory,'db')
 
 	def kmc_command(self):
-		return ' '.join(['kmc', '-k'+self.kmer, '-ci'+self.min_kmers_threshold, '-t'+self.threads, '-fm', self.downloaded_file(), self.nt_database(), self.temp_working_dir])
+		return ' '.join(['kmc', '-k'+self.kmer, '-ci'+self.min_kmers_threshold, '-t'+self.threads, '-fm', self.input_file, self.db_full(), self.temp_working_dir])
+	
+	def kmc_compact_command(self):
+		return ' '.join(['kmc_tools', 'compact', self.db_full(), self.db_compact()])
 	
 	def run(self):
 		os.makedirs(self.output_directory)
-		self.logger.info("Downloading database" )
-		self.download_file()
 		
 		self.logger.info("Counting kmers" )
 		subprocess.call(self.kmc_command(),shell=True)
 		
-		# compact
+		self.logger.info("Compacting database" )
+		subprocess.call(self.kmc_compact_command(),shell=True)
 
 	def cleanup(self):
 		shutil.rmtree(self.temp_working_dir)
+		# delete the full db
+		

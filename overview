@@ -1,3 +1,8 @@
+bsub.py 5 log  ncbi-genome-download  --format fasta --genus Salmonella bacteria
+bsub.py 10 logcompact kmc_tools compact ntdb nt_compact
+https://github.com/kblin/ncbi-genome-download
+
+S. Typhi
 
 distribute nt database
 # prepare database
