@@ -8,7 +8,6 @@ from pequeno.Kmc import Kmc
 
 class PrepareDb:
 	def __init__(self,options):
-		self.start_time = int(time.time())
 		self.logger = logging.getLogger(__name__)
 		self.output_directory        = options.output_directory 
 		self.verbose                 = options.verbose
